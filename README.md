@@ -26,7 +26,7 @@ docker run -d -it --name simplecloud -e STARTUP=Manager simplecloud
 version: '3'
 services:
   simplecloud:
-    image: simplecloud:2.7.1 # The name of the image
+    image: simplecloud:latest # The name of the image
     container_name: simplecloud
     volumes:
       - simplecloud_data:/app # Stores the data persistent
