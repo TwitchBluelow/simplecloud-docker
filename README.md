@@ -16,6 +16,31 @@ docker run -d -it --name simplecloud simplecloud
 - STARTUP
     - Possible values: **Manager | Wrapper**
     - This starts the Manager or Wrapper application automatically
+### Example
+```bash
+docker run -d -it --name simplecloud -e STARTUP=Manager simplecloud
+```
+
+## Docker Compose
+```yml
+version: '3'
+services:
+  simplecloud:
+    image: simplecloud:2.7.1 # The name of the image
+    container_name: simplecloud
+    volumes:
+      - simplecloud_data:/app # Stores the data persistent
+    ports:
+      - "25565:25565"  # Change the port if your Cloud listens on a different port
+      - "8585:8585" # REST-API
+    environment:
+      - STARTUP=Manager  # Set the required STARTUP application here
+    stdin_open: true 
+    tty: true
+
+volumes:
+  simplecloud_data:
+```
 
 ## Setting up the Cloud-System
 ```bash
