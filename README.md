@@ -9,7 +9,7 @@ docker pull bluel0w/simplecloud-docker
 
 ## Running the container
 ```bash
-docker run -d -it --name simplecloud simplecloud
+docker run -d -it --name simplecloud bluel0w/simplecloud-docker:latest
 ```
 
 ## Environment Variables
@@ -18,7 +18,7 @@ docker run -d -it --name simplecloud simplecloud
     - This starts the Manager or Wrapper application automatically
 ### Example
 ```bash
-docker run -d -it --name simplecloud -e STARTUP=Manager simplecloud
+docker run -d -it --name simplecloud -e STARTUP=Manager bluel0w/simplecloud-docker:latest
 ```
 
 ## Docker Compose (Manager only)
@@ -28,7 +28,7 @@ docker run -d -it --name simplecloud -e STARTUP=Manager simplecloud
 version: '3'
 services:
   simplecloud:
-    image: simplecloud:latest # The name of the image
+    image: bluel0w/simplecloud-docker:latest # The name of the image
     container_name: simplecloud
     volumes:
       - simplecloud_data:/app # Stores the data persistent
