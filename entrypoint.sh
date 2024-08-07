@@ -14,8 +14,4 @@ else
   exit 1
 fi
 
-# Run the command in a screen session
-screen -S SimpleCloud $command
-
-# Keep the container running
-tail -f /dev/null
+$command

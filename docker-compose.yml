@@ -1,0 +1,31 @@
+version: '3'
+services:
+  simplecloud-manager:
+    image: bluel0w/simplecloud-docker:latest # The name of the image
+    volumes:
+      - simplecloud_data:/app # Stores the data persistent
+    networks:
+      - simplecloud_net
+    ports:
+      - "25565:25565"  # Change the port if your Cloud listens on a different port
+      - "8585:8585" # REST-API
+    environment:
+      - STARTUP=Manager  # Set the required STARTUP application here
+    stdin_open: true 
+    tty: true
+  simplecloud-wrapper:
+    image: bluel0w/simplecloud-docker:latest # The name of the image
+    volumes:
+      - simplecloud_data:/app # Stores the data persistent
+    networks:
+      - simplecloud_net
+    environment:
+      - STARTUP=Wrapper  # Set the required STARTUP application here
+    stdin_open: true 
+    tty: true
+
+volumes:
+  simplecloud_data:
+
+networks:
+  simplecloud_net:
