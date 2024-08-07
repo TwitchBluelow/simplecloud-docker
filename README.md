@@ -21,7 +21,9 @@ docker run -d -it --name simplecloud simplecloud
 docker run -d -it --name simplecloud -e STARTUP=Manager simplecloud
 ```
 
-## Docker Compose
+## Docker Compose (Manager only)
+### Note: An additional Wrapper is optional since Manager has an InternalWrapper
+
 ```yml
 version: '3'
 services:
@@ -42,12 +44,48 @@ volumes:
   simplecloud_data:
 ```
 
-## Setting up the Cloud-System
+## Docker Compose (Manager + Additional Wrapper)
+### Note: An additional Wrapper is optional since Manager has an InternalWrapper
+```yml
+version: '3'
+services:
+  simplecloud-manager:
+    image: bluel0w/simplecloud-docker:latest # The name of the image
+    volumes:
+      - simplecloud_data:/app # Stores the data persistent
+    networks:
+      - simplecloud_net
+    ports:
+      - "25565:25565"  # Change the port if your Cloud listens on a different port
+      - "8585:8585" # REST-API
+    environment:
+      - STARTUP=Manager  # Set the required STARTUP application here
+    stdin_open: true 
+    tty: true
+  simplecloud-wrapper:
+    image: bluel0w/simplecloud-docker:latest # The name of the image
+    volumes:
+      - simplecloud_data:/app # Stores the data persistent
+    networks:
+      - simplecloud_net
+    environment:
+      - STARTUP=Wrapper  # Set the required STARTUP application here
+    stdin_open: true 
+    tty: true
+
+volumes:
+  simplecloud_data:
+
+networks:
+  simplecloud_net:
+```
+
+## Connect to SimpleCloud Command-Line
 ```bash
 docker attach simplecloud
 ```
 
 This way you can interact with the built-in shell.
 
-### Please note!
+### Please note!!
 It is highly recommended to use a volume to store persistent data of the cloud configurations.
