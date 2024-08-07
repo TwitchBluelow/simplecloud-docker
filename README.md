@@ -4,7 +4,7 @@ This image provides the possibility to run simplecloud in docker. The image runs
 
 ## Pull the image
 ```bash
-docker pull simplecloud-docker
+docker pull bluel0w/simplecloud-docker
 ```
 
 ## Running the container
