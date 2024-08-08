@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine-full
+FROM amazoncorretto:21-alpine-jdk
 WORKDIR /app
 
 COPY entrypoint.sh /app/
